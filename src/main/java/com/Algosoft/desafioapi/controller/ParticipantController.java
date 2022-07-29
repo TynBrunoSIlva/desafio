@@ -31,7 +31,7 @@ public class ParticipantController {
 	}
 
 	@GetMapping("{id}")
-	public Optional<Participant> finById(@PathVariable Long id) {
+	public Participant finById(@PathVariable Long id) {
 		return service.findById(id);
 	}
 
@@ -40,9 +40,9 @@ public class ParticipantController {
 		return service.save(participant);
 	}
 
-	@PutMapping
-	public Participant update(@RequestBody Participant participant) {
-		return service.update(participant);
+	@PutMapping("{id}")
+	public Participant update(@RequestBody Participant participant,@PathVariable Long id) {
+		return service.update(participant, id);
 	}
 
 	@DeleteMapping("{id}")

@@ -32,9 +32,9 @@ public class LocationController {
 		return service.save(location);
 	}
 
-	@PutMapping
-	public Location update(@RequestBody Location location) {
-		return service.update(location);
+	@PutMapping("{id}")
+	public Location update(@RequestBody Location location, @PathVariable Long id) {
+		return service.update(location, id);
 	}
 
 	@DeleteMapping("{id}")

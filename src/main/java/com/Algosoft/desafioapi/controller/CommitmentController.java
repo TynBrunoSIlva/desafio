@@ -32,7 +32,7 @@ public class CommitmentController {
 	}
 
 	@GetMapping("{id}")
-	public Optional<Commitment> findById(@PathVariable Long id) {
+	public Commitment findById(@PathVariable Long id) {
 		return service.findById(id);
 	}
 

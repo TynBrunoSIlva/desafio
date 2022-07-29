@@ -6,6 +6,7 @@ import java.util.Optional;
 import com.Algosoft.desafioapi.model.Commitment;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.Algosoft.desafioapi.model.Participant;
@@ -27,18 +28,22 @@ public class ParticipantService {
 		return repository.findAll();
 	}
 
-	public Optional<Participant> findById(Long id) {
-		return repository.findById(id);
+	public Participant findById(Long id) {
+		Optional<Participant> result  = repository.findById(id);
+		if (result.isEmpty()) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Participante não Encontrado");
+		}
+		return result.get();
 	}
 
 	public Participant save(Participant participant) {
 		return repository.save(participant);
 	}
 
-	public Participant update(Participant participant) {
-		Optional<Participant> result = repository.findById(participant.getId());
+	public Participant update(Participant participant,Long id) {
+		Optional<Participant> result = repository.findById(id);
 		if (result.isEmpty()) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Participante Não Encontrado");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Participante Não Encontrado");
 		}
 		return repository.save(participant);
 	}
@@ -48,7 +53,6 @@ public class ParticipantService {
 		if(commitments.stream().anyMatch(commitment ->  commitment.getParticipants().stream().anyMatch(participant -> participant.getId().equals(id)))){
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Participante esta vinculado a um Compromisso");
 		}
-
 		repository.deleteById(id);
 	}
 

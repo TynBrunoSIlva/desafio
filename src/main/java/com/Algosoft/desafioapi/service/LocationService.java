@@ -30,7 +30,7 @@ public class LocationService {
 	public Location findById(Long id) {
 		Optional<Location> result = repository.findById(id);
 		if (result.isEmpty()) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Localização Não Encontrada");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Localização Não Encontrada");
 		}
 		return result.get();
 	}
@@ -39,10 +39,10 @@ public class LocationService {
 		return repository.save(location);
 	}
 
-	public Location update(Location location) {
-		Optional<Location> result = repository.findById(location.getId());
+	public Location update(Location location, Long id) {
+		Optional<Location> result = repository.findById(id);
 		if (result.isEmpty()) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Localização Não Encontrada");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Localização Não Encontrada");
 		}
 		return repository.save(location);
 	}

@@ -38,8 +38,12 @@ public class CommitmentService {
 		return repository.findAll().stream().filter(commitment -> commitment.getParticipants().stream().anyMatch(participant -> participant.getId().equals(id))).filter(commitment -> commitment.getSituation().toString().equals(situation)).collect(Collectors.toList());
 	}
 
-	public Optional<Commitment> findById(Long id) {
-		return repository.findById(id);
+	public Commitment findById(Long id) {
+		Optional<Commitment> result = repository.findById(id);
+		if (result.isEmpty()) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Compromisso Não Encontrado");
+		}
+		return result.get();
 	}
 
 	public Commitment save(Commitment commitment) {
@@ -53,7 +57,7 @@ public class CommitmentService {
 	public Commitment update(Commitment commitment, Long id) {
 		Optional<Commitment> result = repository.findById(id);
 		if (result.isEmpty()) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Compromisso Não Encontrado");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Compromisso Não Encontrado");
 			}
 		if(result.get().getSituation() != Situation.PENDING){
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Situação invalida");
@@ -72,7 +76,7 @@ public class CommitmentService {
 	public void delete(Long id) {
 		Optional<Commitment> result = repository.findById(id);
 		if (result.isEmpty()) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Compromisso Não Encontrado");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Compromisso Não Encontrado");
 		}
 		if (result.get().getSituation() != Situation.PENDING){
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Situação Invalida");
