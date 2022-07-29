@@ -44,6 +44,7 @@ public class LocationService {
 		if (result.isEmpty()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Localização Não Encontrada");
 		}
+		location.setId(id);
 		return repository.save(location);
 	}
 
@@ -52,7 +53,7 @@ public class LocationService {
 		if(commitments.stream().anyMatch(commitment ->  commitment.getLocation().getId().equals(id))){
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Localização vInculada ao Compromisso ");
 		}
-    
 		repository.deleteById(id);
 	}
+
 }

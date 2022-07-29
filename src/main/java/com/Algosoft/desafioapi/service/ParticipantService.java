@@ -6,7 +6,6 @@ import java.util.Optional;
 import com.Algosoft.desafioapi.model.Commitment;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.Algosoft.desafioapi.model.Participant;
@@ -45,6 +44,7 @@ public class ParticipantService {
 		if (result.isEmpty()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Participante Não Encontrado");
 		}
+		participant.setId(id);
 		return repository.save(participant);
 	}
 	
@@ -59,5 +59,4 @@ public class ParticipantService {
 		}
 		repository.deleteById(id);
 	}
-
 }
