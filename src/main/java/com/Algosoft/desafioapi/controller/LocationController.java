@@ -41,5 +41,4 @@ public class LocationController {
 	public void delete(@PathVariable Long id) {
 		service.delete(id);
 	}
-
 }

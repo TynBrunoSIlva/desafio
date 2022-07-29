@@ -7,5 +7,4 @@ import com.Algosoft.desafioapi.model.Participant;
 
 @Repository
 public interface ParticipantRepository extends JpaRepository<Participant, Long>{
-
 }

@@ -32,6 +32,4 @@ public class HistoryController {
 	public List<History> findAllByCommitment(@PathVariable Long id){
 		return service.findAllByCommitment(id);
 	}
-
-
 }

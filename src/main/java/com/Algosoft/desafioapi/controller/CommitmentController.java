@@ -39,6 +39,7 @@ public class CommitmentController {
 	@GetMapping("participant/{id}")
 	public List<Commitment> findByParticipant(@PathVariable Long id) { return service.findByParticipant(id);
 	}
+
 	@GetMapping("participant-and-situation/{id}/{situation}")
 	public List<Commitment> findByParticipantAndSituation(@PathVariable Long id, @PathVariable String situation) {
 		return service.findByParticipantAndSituation(id, situation);
@@ -47,7 +48,6 @@ public class CommitmentController {
 	@PostMapping
 	public Commitment save(@RequestBody Commitment commitment) {
 		return service.save(commitment);
-
 	}
 
 	@PutMapping("{id}")
@@ -59,5 +59,4 @@ public class CommitmentController {
 	public void delete(@PathVariable Long id) {
 		service.delete(id);
 	}
-
 }

@@ -7,5 +7,4 @@ import com.Algosoft.desafioapi.model.History;
 
 @Repository
 public interface HistoryRepository extends JpaRepository<History, Long> {
-
 }

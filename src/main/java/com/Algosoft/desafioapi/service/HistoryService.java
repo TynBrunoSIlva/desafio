@@ -11,26 +11,25 @@ import com.Algosoft.desafioapi.repository.HistoryRepository;
 @Service
 public class HistoryService {
 
-	final HistoryRepository repository;
+    final HistoryRepository repository;
 
-	public HistoryService(HistoryRepository repository) {
-		this.repository = repository;
-	}
+    public HistoryService(HistoryRepository repository) {
+        this.repository = repository;
+    }
 
-	public List<History> findAll() {
-		return repository.findAll();
-	}
+    public List<History> findAll() {
+        return repository.findAll();
+    }
 
-	public History save(History history) {
-		return repository.save(history);
-	}
+    public History save(History history) {
+        return repository.save(history);
+    }
 
-	public void delete(Long id) {
-		repository.deleteById(id);
-	}
+    public void delete(Long id) {
+        repository.deleteById(id);
+    }
 
     public List<History> findAllByCommitment(Long id) {
-		return repository.findAll().stream().filter(history -> history.getCommitment().getId().equals(id)).collect(Collectors.toList());
-
+        return repository.findAll().stream().filter(history -> history.getCommitment().getId().equals(id)).collect(Collectors.toList());
     }
 }

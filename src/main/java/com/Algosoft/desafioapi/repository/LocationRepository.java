@@ -7,5 +7,4 @@ import com.Algosoft.desafioapi.model.Location;
 
 @Repository
 public interface LocationRepository extends JpaRepository<Location, Long> {
-
 }
